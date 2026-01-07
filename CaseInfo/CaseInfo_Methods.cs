@@ -575,7 +575,7 @@ namespace CaseInfo
 
         public static string ChooseLanguage()
         {
-            var lang = HelperMethods.GetUserInput("Run PVAutomator at the end? Cancel to not run", "PV language NL or FR");
+            var lang = HelperMethods.GetUserInput("Run ReportAutomator at the end? Cancel to not run", "Report language NL or FR");
             switch (lang.ToUpper())
             {
                 case "NL":
@@ -594,12 +594,12 @@ namespace CaseInfo
             return choice;
         }
 
-        public static bool PVautomator(string json, string lang, string filename)
+        public static bool ReportAutomator(string json, string lang, string filename)
         {
-            HelperMethods.OutputMessage($"{DateTime.Now.TimeOfDay}: Generating PV from results with PVAutomator...");
+            HelperMethods.OutputMessage($"{DateTime.Now.TimeOfDay}: Generating report from results with ReportAutomator...");
 
-            string cmd = $"& Set-Location -Path \'{AppDomain.CurrentDomain.BaseDirectory}XTensions\\Tools\\PVAutomator\\\'; " +
-                $"py \'PVAutomator.py\' string \'{json.Replace("\"", "\\\"\\\"")}\' {lang} \'{filename}_pvauto\'";
+            string cmd = $"& Set-Location -Path \'{AppDomain.CurrentDomain.BaseDirectory}XTensions\\Tools\\ReportAutomator\\\'; " +
+                $"py \'ReportAutomator.py\' string \'{json.Replace("\"", "\\\"\\\"")}\' {lang} \'{filename}_report\'";
             string[] oe = StartProcess("powershell.exe", cmd);
 
             if (oe[0].Contains("ERROR")) return false;

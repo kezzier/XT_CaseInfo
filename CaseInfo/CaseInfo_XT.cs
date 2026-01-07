@@ -21,7 +21,7 @@ namespace CaseInfo
         private static string output_filename;
         public static bool caseusers;
         private static bool running;
-        /*private static string pvauto;*/
+        /*private static string report;*/
         public static bool hasvols;
         public static Partition current_part;
         public static string current_os;
@@ -49,7 +49,7 @@ namespace CaseInfo
             caseinfo_done = false;
             caseusers = false;
             running = false;
-            /*pvauto = "";*/
+            /*report = "";*/
 
             return 1;
             
@@ -97,8 +97,8 @@ namespace CaseInfo
                     if (output_filename == "Clicked cancel") output_filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"{current_case.Title}_json.txt");
                     if (!output_filename.EndsWith(".txt")) output_filename += ".txt";
 
-                    /*// ask if user wants to run pvautomator at the end
-                    pvauto = CaseInfo_Methods.ChooseLanguage();*/
+                    /*// ask if user wants to run ReportAutomator at the end
+                    report = CaseInfo_Methods.ChooseLanguage();*/
 
                     CaseInfo_Methods.ListEvObj(HelperMethods.GetCaseEvidence());                    
                     caseinfo_done = true;
@@ -221,12 +221,12 @@ namespace CaseInfo
                 HelperMethods.OutputMessage($"Case Info (json): {caseinfo_json}");
                 File.WriteAllText(output_filename, caseinfo_json);
                 HelperMethods.OutputMessage($"[CaseInfo] JSON saved in {output_filename}");
-                /*if (pvauto != "cancel")
+                /*if (report != "cancel")
                 {
-                    string pvauto_filename = output_filename.Substring(0, output_filename.Length-9);
-                    if (CaseInfo_Methods.PVautomator(caseinfo_json, pvauto, pvauto_filename)) HelperMethods.OutputMessage($"{DateTime.Now.TimeOfDay}: PV generated: {pvauto_filename}_pvauto.docx");
-                    else HelperMethods.OutputMessage($"{DateTime.Now.TimeOfDay}: Unable to generate PV");
-                    HelperMethods.OutputMessage($"{DateTime.Now.TimeOfDay}: Unable to generate PV");
+                    string report_filename = output_filename.Substring(0, output_filename.Length-9);
+                    if (CaseInfo_Methods.ReportAutomator(caseinfo_json, report, report_filename)) HelperMethods.OutputMessage($"{DateTime.Now.TimeOfDay}: report generated: {report_filename}_report.docx");
+                    else HelperMethods.OutputMessage($"{DateTime.Now.TimeOfDay}: Unable to generate report");
+                    HelperMethods.OutputMessage($"{DateTime.Now.TimeOfDay}: Unable to generate report");
                 }*/
             }
             else HelperMethods.OutputMessage("[CaseInfo] Dll loaded!");
